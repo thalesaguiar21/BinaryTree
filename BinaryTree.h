@@ -9,12 +9,14 @@ public:
 	// ~BinaryTree();
 	void addNode(int key);
 	void findNode(int key);
+	void rmNode(int key);
 	void preOrdem();
 
 private:
 	Node *root;
 	void addNodeAux(int key, Node &r);
 	void findNodeAux(int key, Node &r);
+	void rmNodeAux(int key, Node &r);
 	void preOrdemAux(Node &r);
 };
 

@@ -13,8 +13,13 @@ int main()
 	bTree.addNode(10);
 	// bTree.addNode(10);
 	bTree.addNode(400);
+	bTree.preOrdem();
+
+	bTree.rmNode(10);
+	cout << "\n";
+	bTree.preOrdem();
 	// cout << bTree.getRoot().key <<endl;
 	// bTree.preOrdem();
-	bTree.findNode(10);
+	// bTree.findNode(10);
 	return 0;
 }
