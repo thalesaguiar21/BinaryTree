@@ -4,20 +4,18 @@
 
 class BinaryTree{
 public:
-	Node *root;
+	Node getRoot();
 	BinaryTree();
-	~BinaryTree();
-	bool findNode(int key);
-	bool addNode(int key);
-	bool rmNode(int key);
+	// ~BinaryTree();
+	void addNode(int key);
+	void findNode(int key);
 	void preOrdem();
 
 private:
-	bool findNodeAux(int key, Node *r);
-	bool addNodeAux(int key, Node **r);
-	bool rmNodeAux(int key, Node **r);
-	void preOrdemAux(Node *r);
-
+	Node *root;
+	void addNodeAux(int key, Node &r);
+	void findNodeAux(int key, Node &r);
+	void preOrdemAux(Node &r);
 };
 
 

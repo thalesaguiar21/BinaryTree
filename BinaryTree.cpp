@@ -6,90 +6,85 @@ using std::endl;
 BinaryTree::BinaryTree(){
 	this->root = NULL;
 }
-BinaryTree::~BinaryTree(){
-	delete this->root;
-}
+// BinaryTree::~BinaryTree(){
+// 	delete this->root;
+// }
 
-// Funções visíveis
-bool BinaryTree::findNode(int key){
-	bool result = findNodeAux(key, this->root);
-	return result;
-}
-
-bool BinaryTree::addNode(int key){
-	bool result = addNodeAux(key, &(this->root));
-	return true;
-}
-
-bool BinaryTree::rmNode(int key){
-	rmNodeAux(key, &(this->root));
-	return true;
-}
-
-void BinaryTree::preOrdem(){
-	preOrdemAux(this->root);
-}
-
-// Funções auxiliares
-bool BinaryTree::findNodeAux(int key, Node *r){
-	if(r != NULL){
-		if(key == r->key){
-			return true;
-		}
-		else if(key < r->key){
-			r = r->left;
-			return findNodeAux(key, r);
-		}
-		else{
-			r = r->right;
-			return findNodeAux(key, r);
-		}
+Node BinaryTree::getRoot(){
+	if(root != NULL){
+		return *root;
 	}
-	return false;
+	cout << "Árvore vazia.\n"; 
+	return NULL;
 }
 
-bool BinaryTree::addNodeAux(int key, Node **r){
-	if(*r == NULL){
-		*r = new Node(key);
-		return true;
+// ################# Busca ########################
+void BinaryTree::findNode(int key){
+	if(root == NULL){
+		cout << "ERRO! A árvore está vazia.\n";
+	}
+	else
+		findNodeAux(key, *root);
+}
+
+void BinaryTree::findNodeAux(int key, Node &r){
+	if(key == r.key){
+		cout << "Nó encontrado\n";
+	}
+	else if(key < r.key){
+		if(r.left == NULL)
+			cout << "O nó não foi encontrado.\n";
+		else
+			findNodeAux(key, *(r.left));
 	}
 	else{
-		if(key == (*r)->key)
-			return false;
-		else if(key < (*r)->key){
-			r = &((*r)->left);
-			return addNodeAux(key, r);
-		}
-		else{
-			r = &((*r)->right);
-			return addNodeAux(key, r);
-		}
+		if(r.right == NULL)
+			cout << "O nó não foi encontrado.\n";
+		else
+			findNodeAux(key, *(r.right));
 	}
-	return false;
 }
 
-bool BinaryTree::rmNodeAux(int key, Node **r){
-	if(*r != NULL){
-		if(key == (*r)->key){
-			if((*r)->left == NULL && (*r)->right == NULL)
-				delete *r;
-		}
-		else if(key < (*r)->key){
-			r = &((*r)->left);
-			rmNodeAux(key, r);
-		}
-		else{
-			r = &((*r)->right);
-			rmNodeAux(key, r);
-		}
+// ################# Inserção ######################
+void BinaryTree::addNode(int key){
+	if(root == NULL){
+		root = new Node(key);
 	}
-	return true;
+	else
+		addNodeAux(key, *root);
 }
 
-void BinaryTree::preOrdemAux(Node *r){
-	if(r != NULL){
-		cout << r->key <<endl;
-		preOrdemAux(r->left);
-		preOrdemAux(r->right);
+void BinaryTree::addNodeAux(int key, Node &r){
+	if(key < r.key){
+		if(r.left == NULL){
+			r.left = new Node(key);
+		}
+		else
+			addNodeAux(key, *(r.left));
 	}
+	else if(key > r.key){
+		if(r.right == NULL){
+			r.right = new Node(key);
+		}
+		else
+			addNodeAux(key, *(r.right));
+	}
+	else
+		cout << "ERRO!O nó " << key << " já foi inserido.\n";
+}
+
+
+// ################# Pré-Ordem ########################
+void BinaryTree::preOrdem(){
+	if(root != NULL){
+		preOrdemAux(*root);
+	}
+}
+
+void BinaryTree::preOrdemAux(Node &r){
+		cout << r.key <<endl;
+		if(r.left != NULL)
+			preOrdemAux(*(r.left));
+		if(r.right != NULL)
+			preOrdemAux(*(r.right));
 }

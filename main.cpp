@@ -6,11 +6,15 @@ using std::endl;
 
 int main()
 {
-	BinaryTree *bTree = new BinaryTree();
-	bTree->addNode(125);
-	cout << "\n";
-	bTree->preOrdem();
-	//bTree->preOrdem();
-	delete bTree;
+	BinaryTree bTree;
+	bTree.addNode(30);
+
+	bTree.addNode(20);
+	bTree.addNode(10);
+	// bTree.addNode(10);
+	bTree.addNode(400);
+	// cout << bTree.getRoot().key <<endl;
+	// bTree.preOrdem();
+	bTree.findNode(10);
 	return 0;
 }
