@@ -85,7 +85,6 @@ void BinaryTree::rmNode(int key){
 void BinaryTree::rmNodeAux(int key, Node &r){
 	if(key == r.key){
 		if(r.left == NULL && r.right == NULL){
-			cout << "Oi\n";
 			delete &r;
 		}
 		// else if(r.left == NULL && !(r.right == NULL)){
